@@ -31,9 +31,6 @@ function UserZone() {
 
   return (
     <div className={styles.container}>
-      <IconButton style={{ color: 'white' }} aria-label="Panier" >
-        <AddShoppingCartIcon />
-      </IconButton>
       <IconButton style={{ color: 'white' }} aria-label="Connexion" onClick={handleClickOpen}>
         <PersonIcon/>
       </IconButton>
@@ -42,7 +39,7 @@ function UserZone() {
       
         <DialogContent className={styles.modalBg}>
 
-          <SignUp></SignUp>
+          <SignIn></SignIn>
       
         </DialogContent>
 
