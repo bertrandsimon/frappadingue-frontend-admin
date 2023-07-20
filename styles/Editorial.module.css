@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.editorialImg {
+   width: 500px;
+   margin: 40px;
+}
+
+.editorialTxt {
+    max-width: 680px;
+}
