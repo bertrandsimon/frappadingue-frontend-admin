@@ -25,19 +25,19 @@ const store = configureStore({
  
  const persistor = persistStore(store);
 
- const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#FFFF00', // Yellow color code
-    },
-  },
-});
+//  const darkTheme = createTheme({
+//   palette: {
+//     mode: 'dark',
+//     primary: {
+//       main: '#FFFF00', // Yellow color code
+//     },
+//   },
+// });
 
 function App({ Component, pageProps }) {
   return (
     <>
-      <ThemeProvider theme={darkTheme}>
+   
         <Provider store={store}>
           <PersistGate persistor={persistor}>
             <Head>
@@ -46,7 +46,7 @@ function App({ Component, pageProps }) {
             <Component {...pageProps} />
             </PersistGate>
         </Provider>
-      </ThemeProvider>
+   
     </>
   );
 }
