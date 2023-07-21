@@ -12,6 +12,7 @@ import { hideArticle } from '../reducers/hiddenArticles';
 import Header from './common/Header';
 import EventAdd from './event/EventAdd';
 import EventListing from './event/EventListing';
+import UserListing from './user/UserListing';
 
 import styles from '../styles/Home.module.css';
 
@@ -21,6 +22,7 @@ function Home() {
       
       <div className={styles.container}>
         <Header></Header>
+        <UserListing></UserListing>
         <EventListing></EventListing>
         <EventAdd></EventAdd>
       </div>

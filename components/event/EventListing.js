@@ -17,7 +17,7 @@ import ModeIcon from '@mui/icons-material/Mode';
 
 function EventListing() {
 
-const [eventsData, setEventsData] = useState([{}]);
+const [eventsData, setEventsData] = useState([]);
 
 useEffect(() => {
   fetch('http://localhost:3000/events/allEvents')

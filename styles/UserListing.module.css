@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+.up{
+    text-transform: uppercase !important;
+    font-weight: 600;
+    color: yellow !important;
+}
