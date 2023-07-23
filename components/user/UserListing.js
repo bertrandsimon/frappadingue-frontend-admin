@@ -27,7 +27,18 @@ const columns = [
   { field: 'name', headerName: 'Nom', width: 200 },
   { field: 'surname', headerName: 'Prénom', width: 200 },
   { field: 'email', headerName: 'Email', width: 300 },
-  { field: 'Voir la fiche', headerName: 'View', width: 300 },
+  {
+    field: 'voir_la_fiche',
+    headerName: 'Voir la fiche',
+    width: 300,
+    renderCell: (params) => {
+      return (
+        <IconButton color="primary" aria-label="Voir" onClick={() => handlePreview(params.row.id)}>
+          <PreviewIcon />
+        </IconButton>
+      );
+    },
+  },
 ];
 
 
@@ -49,6 +60,7 @@ useEffect(() => {
   //console.log('usersData:', usersData);
 }, [usersData]);
 
+const handlePreview = (id) => {console.log('row ID : ', id)}
 
 const handleDelete = (id) => {
   console.log(id)
@@ -83,46 +95,7 @@ const handleDelete = (id) => {
           toolbar: GridToolbar,
         }}
       />
-
-    
-      <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
       
-      
-
-        <TableHead>
-          <TableRow>
-            <TableCell>NOM</TableCell>
-            <TableCell align="center">PRENOM</TableCell>
-            <TableCell align="center">EMAIL</TableCell>
-            <TableCell align="center">VOIR LA FICHE</TableCell>
-            
-          </TableRow>
-        </TableHead>
-
-        <TableBody>
-          {usersData.map((user) => (
-            <TableRow
-              key={user.id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row" className='up'>{user.name}</TableCell>
-              <TableCell align="center" >  {user.surname}</TableCell>
-              <TableCell align="center" >  {user.email}</TableCell>
-
-           
-
-              <TableCell align="center"> 
-                <IconButton style={{ color: 'green' }} aria-label="Voir">
-                  <PreviewIcon/>
-                </IconButton>
-                </TableCell>
-         
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
     </div>
   );
 
