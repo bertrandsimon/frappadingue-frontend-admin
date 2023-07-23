@@ -78,12 +78,12 @@ const handleDelete = (id) => {
             
               <TableCell align="center" >  {event.location}</TableCell>
               <TableCell align="center">
-                <IconButton style={{ color: 'white' }} aria-label="Modifier">
+                <IconButton style={{ color: 'green' }} aria-label="Modifier">
                     <ModeIcon/>
                 </IconButton>
               </TableCell>
               <TableCell align="center"> 
-                <IconButton style={{ color: 'white' }} aria-label="Supprimer" onClick ={ () => handleDelete(event._id) }>
+                <IconButton style={{ color: 'red' }} aria-label="Supprimer" onClick ={ () => handleDelete(event._id) }>
                   <DeleteForeverIcon/>
                 </IconButton>
                 </TableCell>

@@ -2,7 +2,7 @@ import styles from '../../styles/UserListing.module.css';
 
 import { useState, useEffect } from 'react';
 
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -23,23 +23,13 @@ function UserListing() {
 const [usersData, setUsersData] = useState([]);
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'name', headerName: 'Nom', width: 130 },
-  { field: 'surname', headerName: 'Prénom', width: 130 },
-  { field: 'email', headerName: 'Email', width: 130 },
+  { field: 'id', headerName: 'ID', width: 300 },
+  { field: 'name', headerName: 'Nom', width: 200 },
+  { field: 'surname', headerName: 'Prénom', width: 200 },
+  { field: 'email', headerName: 'Email', width: 300 },
+  { field: 'Voir la fiche', headerName: 'View', width: 300 },
 ];
 
-const rows = [
-  { id: 1, name: 'Snow', surname: 'Jon', email: 35 },
-  { id: 2, name: 'Lannister', surname: 'Cersei', email: 42 },
-  { id: 3, name: 'Lannister', surname: 'Jaime', email: 45 },
-  { id: 4, name: 'Stark', surname: 'Arya', email: 16 },
-  { id: 5, name: 'Targaryen', surname: 'Daenerys', email: null },
-  { id: 6, name: 'Melisandre', surname: null, email: 150 },
-  { id: 7, name: 'Clifford', surname: 'Ferrara', email: 44 },
-  { id: 8, name: 'Frances', surname: 'Rossini', email: 36 },
-  { id: 9, name: 'Roxie', surname: 'Harvey', email: 65 },
-];
 
 
 useEffect(() => {
@@ -56,7 +46,7 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  console.log('usersData:', usersData);
+  //console.log('usersData:', usersData);
 }, [usersData]);
 
 
@@ -89,6 +79,9 @@ const handleDelete = (id) => {
         }}
         pageSizeOptions={[5, 10]}
         style={{ width: '100%' }}
+        slots={{
+          toolbar: GridToolbar,
+        }}
       />
 
     
@@ -120,7 +113,7 @@ const handleDelete = (id) => {
            
 
               <TableCell align="center"> 
-                <IconButton style={{ color: 'white' }} aria-label="Voir">
+                <IconButton style={{ color: 'green' }} aria-label="Voir">
                   <PreviewIcon/>
                 </IconButton>
                 </TableCell>

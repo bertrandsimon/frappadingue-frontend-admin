@@ -7,6 +7,8 @@ function Menu() {
       <div> | </div>
       <div className={styles.item}>clients</div>
       <div> | </div>
+      <div className={styles.item}>equipes</div>
+      <div> | </div>
       <div className={styles.item}>commandes</div>
     </div>
   );
