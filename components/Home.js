@@ -10,6 +10,7 @@ import {
   HomeIcon,
   UsersIcon,
   XMarkIcon,
+  BoltIcon,
 } from '@heroicons/react/24/outline'
 
 
@@ -20,13 +21,14 @@ import UserListing from './user/UserListing';
 import Footer from './common/Footer';
 import styles from '../styles/Home.module.css';
 
+import Image from 'next/image';
+
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
+  { name: 'Dashboard', icon: HomeIcon, current: true },
+  { name: 'Courses', icon: CalendarIcon, current: false },
+  { name: 'Clients', icon: UsersIcon, current: false },
+  { name: 'Equipes', icon: BoltIcon, current: false },
+  { name: 'Commandes', icon: DocumentDuplicateIcon, current: false },
 ]
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
@@ -42,6 +44,16 @@ function Home() {
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
+  const [activeTab, setActiveTab] = useState('user'); // Initialize with 'user'
+
+  const handleNavigationClick = (name) => {
+    console.log(name)
+    if (name === 'Courses') {
+      setActiveTab('event');
+    } else {
+      setActiveTab('user');
+    }
+  };
   return (
     // <div className={styles.main}>
     //   <Header></Header>
@@ -76,7 +88,7 @@ function Home() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-gray-900/80" />
+            <div className="fixed inset-0 bg-black bg-opacity-80" />
           </Transition.Child>
 
           <div className="fixed inset-0 flex">
@@ -107,22 +119,25 @@ function Home() {
                   </div>
                 </Transition.Child>
                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-2 ring-1 ring-white/10">
+                <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-black bg-opacity-80 px-6 pb-2 ring-1 ring-white/10">
                   <div className="flex h-16 shrink-0 items-center">
                     <img
                       className="h-8 w-auto"
                       src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                      alt="Your Company"
+                      alt="Frappadingue"
                     />
                   </div>
                   <nav className="flex flex-1 flex-col">
                     <ul role="list" className="flex flex-1 flex-col gap-y-7">
                       <li>
+                     
+
                         <ul role="list" className="-mx-2 space-y-1">
                           {navigation.map((item) => (
-                            <li key={item.name}>
+                            <li key={item.name} onClick={() => handleNavigationClick(item.name)}>
                               <a
-                                href={item.href}
+                                
+                                
                                 className={classNames(
                                   item.current
                                     ? 'bg-gray-800 text-white'
@@ -172,22 +187,20 @@ function Home() {
       {/* Static sidebar for desktop */}
       <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6">
-          <div className="flex h-16 shrink-0 items-center">
-            <img
-              className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-              alt="Your Company"
-            />
+        <div className="flex grow flex-col gap-y-10 overflow-y-auto bg-black bg-opacity-100 px-6">
+          <div className="flex shrink-0 items-center mt-10">
+       
+            <Image src="/images/admin-logo.png" width={143} height={51}/>
+            
           </div>
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>
                 <ul role="list" className="-mx-2 space-y-1">
                   {navigation.map((item) => (
-                    <li key={item.name}>
+                    <li key={item.name} onClick={() => handleNavigationClick(item.name)}>
                       <a
-                        href={item.href}
+                        
                         className={classNames(
                           item.current
                             ? 'bg-gray-800 text-white'
@@ -232,11 +245,11 @@ function Home() {
                 >
                   <img
                     className="h-8 w-8 rounded-full bg-gray-800"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80"
                     alt=""
                   />
                   <span className="sr-only">Your profile</span>
-                  <span aria-hidden="true">Tom Cook</span>
+                  <span aria-hidden="true">Perrine Frappadingue</span>
                 </a>
               </li>
             </ul>
@@ -265,7 +278,9 @@ function Home() {
 
           {/* Your content */}
           
-          <UserListing></UserListing>
+          {/* <UserListing></UserListing> */}
+          {activeTab === 'user' && <UserListing />}
+          {activeTab === 'event' && <EventListing />}
 
           </div>
       </main>
