@@ -3,7 +3,7 @@ import Header from './common/Header';
 import EventAdd from './event/EventAdd';
 import EventListing from './event/EventListing';
 import UserListing from './user/UserListing';
-
+import Footer from './common/Footer';
 import styles from '../styles/Home.module.css';
 
 function Home() {
@@ -15,6 +15,7 @@ function Home() {
         <UserListing></UserListing>
         <EventListing></EventListing>
         <EventAdd></EventAdd>
+        <Footer></Footer>
       </div>
         
        
