@@ -24,12 +24,17 @@ import styles from '../styles/Home.module.css';
 import Image from 'next/image';
 
 const navigation = [
-  { name: 'Dashboard', icon: HomeIcon, current: true },
-  { name: 'Courses', icon: CalendarIcon, current: false },
+  { name: 'Dashboard', icon: HomeIcon, current: false },
+  { name: 'Courses', icon: CalendarIcon, current: true },
   { name: 'Clients', icon: UsersIcon, current: false },
   { name: 'Equipes', icon: BoltIcon, current: false },
   { name: 'Commandes', icon: DocumentDuplicateIcon, current: false },
 ]
+
+console.log(navigation)
+
+console.log(navigation[1].current)
+
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
   { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
@@ -46,26 +51,47 @@ function Home() {
 
   const [activeTab, setActiveTab] = useState('user'); // Initialize with 'user'
 
-  const handleNavigationClick = (name) => {
-    console.log(name)
-    if (name === 'Courses') {
-      setActiveTab('event');
-    } else {
-      setActiveTab('user');
-    }
-  };
-  return (
-    // <div className={styles.main}>
-    //   <Header></Header>
-    //   <div className={styles.container}>
-        
-    //     <UserListing></UserListing>
-    //     <EventListing></EventListing>
-    //     <EventAdd></EventAdd>
-    //     <Footer></Footer>
-    //   </div>
+  // const handleNavigationClick = (name) => {
+  //   console.log(name)
+  //   if (name === 'Courses') {
+  //     setActiveTab('event');
+  //   } else {
+  //     setActiveTab('user');
+  //   }
+  // };
 
-    // </div>
+  const handleNavigationClick = (name) => {
+    switch (name) {
+      case 'Courses':
+        setActiveTab('event');
+        navigation.map((item) => {item.current = false})
+        navigation[1].current = true;
+        break;
+      case 'Clients':
+        setActiveTab('user');
+        navigation.map((item) => {item.current = false})
+        navigation[2].current = true;
+        console.log(navigation)
+        break;
+      case 'Equipes':
+        
+        setActiveTab('team');
+        navigation.map((item) => {item.current = false})
+        navigation[3].current = true;
+        break;
+      case 'Commandes':
+        setActiveTab('order');
+        navigation.map((item) => {item.current = false})
+        navigation[4].current = true;
+        break;
+    }
+
+     
+  };
+
+
+  return (
+
 
     <>
     {/*
@@ -267,7 +293,7 @@ function Home() {
           <span className="sr-only">Your profile</span>
           <img
             className="h-8 w-8 rounded-full bg-gray-800"
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80"
             alt=""
           />
         </a>
@@ -281,7 +307,8 @@ function Home() {
           {/* <UserListing></UserListing> */}
           {activeTab === 'user' && <UserListing />}
           {activeTab === 'event' && <EventListing />}
-
+          {activeTab === 'team' && <EventListing />}
+          {activeTab === 'order' && <EventListing />}
           </div>
       </main>
     </div>
