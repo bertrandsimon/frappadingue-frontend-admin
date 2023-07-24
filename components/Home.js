@@ -1,13 +1,3 @@
-// STATES IMPORT
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-
-
-// IMAGE IMPORT
-import Image from 'next/image';
-
-import { hideArticle } from '../reducers/hiddenArticles';
 
 import Header from './common/Header';
 import EventAdd from './event/EventAdd';

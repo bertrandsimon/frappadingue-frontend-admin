@@ -12,7 +12,7 @@ body {
 }
 
 .up {text-transform: uppercase;}
-
+.bld {font-weight: 600;}
 .yellow {color:#FFE000;}
 .grey {color:#818181}
 .whiteBtn {color: white !important; border-color: #ffffff !important;}

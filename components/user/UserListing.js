@@ -3,24 +3,23 @@ import styles from '../../styles/UserListing.module.css';
 import { useState, useEffect } from 'react';
 
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import SingleUser from './SingleUser';
 
 
 import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import PreviewIcon from '@mui/icons-material/Preview';
 
 function UserListing() {
 
 const [usersData, setUsersData] = useState([]);
+const [singleUserData, setSingleUserData] = useState([]);
+const [open, setOpen] = useState(false);
+
+const handleClose = () => {
+  setOpen(false);
+};
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 300 },
@@ -60,7 +59,17 @@ useEffect(() => {
   //console.log('usersData:', usersData);
 }, [usersData]);
 
-const handlePreview = (id) => {console.log('row ID : ', id)}
+const handlePreview = (id) => {
+  fetch(`http://localhost:3000/users/id/${id}`)
+    .then(response => response.json())
+    .then( data => setSingleUserData(data.user))
+    setOpen(true);
+    //console.log('row ID : ', id)
+}
+
+useEffect(() => {
+  console.log('singleUserData:', singleUserData.name);
+}, [singleUserData]);
 
 const handleDelete = (id) => {
   console.log(id)
@@ -76,10 +85,14 @@ const handleDelete = (id) => {
     .catch(error => {
       console.error('Error deleting event:', error);
     });
+
+  
 };
   return (
     <div className={styles.container}>
       <h1>Listing users</h1>
+
+      
 
       <DataGrid
         rows={usersData}
@@ -95,6 +108,16 @@ const handleDelete = (id) => {
           toolbar: GridToolbar,
         }}
       />
+
+    <Dialog open={open} onClose={handleClose} maxWidth="lg">
+      
+      <DialogContent>
+
+        <SingleUser user={singleUserData}></SingleUser>
+
+      </DialogContent>
+
+    </Dialog>
       
     </div>
   );
