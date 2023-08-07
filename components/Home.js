@@ -4,9 +4,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
   CalendarIcon,
-  ChartPieIcon,
   DocumentDuplicateIcon,
-  FolderIcon,
   HomeIcon,
   UsersIcon,
   XMarkIcon,
@@ -14,12 +12,11 @@ import {
 } from '@heroicons/react/24/outline'
 
 
-import Header from './common/Header';
+
 import EventAdd from './event/EventAdd';
+import DateTest from './event/DateTest';
 import EventListing from './event/EventListing';
 import UserListing from './user/UserListing';
-import Footer from './common/Footer';
-import styles from '../styles/Home.module.css';
 
 import Image from 'next/image';
 
@@ -31,9 +28,6 @@ const navigation = [
   { name: 'Commandes', icon: DocumentDuplicateIcon, current: false },
 ]
 
-console.log(navigation)
-
-console.log(navigation[1].current)
 
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
@@ -51,14 +45,7 @@ function Home() {
 
   const [activeTab, setActiveTab] = useState('user'); // Initialize with 'user'
 
-  // const handleNavigationClick = (name) => {
-  //   console.log(name)
-  //   if (name === 'Courses') {
-  //     setActiveTab('event');
-  //   } else {
-  //     setActiveTab('user');
-  //   }
-  // };
+
 
   const handleNavigationClick = (name) => {
     switch (name) {
@@ -71,7 +58,6 @@ function Home() {
         setActiveTab('user');
         navigation.map((item) => {item.current = false})
         navigation[2].current = true;
-        console.log(navigation)
         break;
       case 'Equipes':
         
@@ -94,15 +80,10 @@ function Home() {
 
 
     <>
-    {/*
-      This example requires updating your template:
-
-      ```
-      <html class="h-full bg-white">
-      <body class="h-full">
-      ```
-    */}
+ 
     <div>
+      <DateTest></DateTest>
+      <EventAdd></EventAdd>
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
           <Transition.Child
@@ -179,27 +160,8 @@ function Home() {
                         </ul>
                       </li>
                       <li>
-                        <div className="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
-                        <ul role="list" className="-mx-2 mt-2 space-y-1">
-                          {teams.map((team) => (
-                            <li key={team.name}>
-                              <a
-                                href={team.href}
-                                className={classNames(
-                                  team.current
-                                    ? 'bg-gray-800 text-white'
-                                    : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                                  'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold cursor-pointer'
-                                )} 
-                              >
-                                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">
-                                  {team.initial}
-                                </span>
-                                <span className="truncate">{team.name}</span>
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
+                        
+                    
                       </li>
                     </ul>
                   </nav>
@@ -242,27 +204,7 @@ function Home() {
                 </ul>
               </li>
               <li>
-                <div className="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
-                <ul role="list" className="-mx-2 mt-2 space-y-1">
-                  {teams.map((team) => (
-                    <li key={team.name}>
-                      <a
-                        href={team.href}
-                        className={classNames(
-                          team.current
-                            ? 'bg-gray-800 text-white'
-                            : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                          'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                        )}
-                      >
-                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">
-                          {team.initial}
-                        </span>
-                        <span className="truncate">{team.name}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+            
               </li>
               <li className="-mx-6 mt-auto">
                 <a

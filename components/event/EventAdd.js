@@ -5,12 +5,19 @@ import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-function EventAdd() {
 
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import 'dayjs/locale/fr';
+
+
+function EventAdd() {
+  const todayDate = new Date();
   const [formData, setFormdata] = useState({
     name:'',
     location:'',
-    date:'',
+    date: '',
     zip_code:'',
     start_hour:'',
     active: true,
@@ -22,9 +29,14 @@ function EventAdd() {
     thumb_image:''
   });
 
+
+  console.log(formData);
+
   const { name, location, date, zip_code, start_hour, active, max_capacity, description, banner_img, price, year, thumb_image } = formData;
   const isFormValid = name && location && date && zip_code && start_hour && active && max_capacity && description && banner_img && price && year && thumb_image;
   //console.log(formData);
+
+ 
 
   const handleSubmit = () => {
     fetch('http://localhost:3000/events/', {
@@ -38,16 +50,24 @@ function EventAdd() {
   
   };
 
+  const handleDateChange = (selectedDate) => {
+    // Convert Day.js object to string before setting in formData
+    const formattedDate = selectedDate.format('YYYY-MM-DD');
+    setFormdata({ ...formData, date: formattedDate });
+  };
+
   return (
-    <div className={styles.container}>
+  // <div className={styles.container}>
+      <div >
     <h1>EventAdd</h1>
 
     <TextField
           required
           id="outlined-required"
-          label="Nom"
+          label="Nom de la course"
           defaultValue=""
           onChange={(e) => setFormdata( {...formData, name : e.target.value} )} value={name}
+          // helperText="Incorrect entry."
         />
 
     <TextField
@@ -58,13 +78,24 @@ function EventAdd() {
               onChange={(e) => setFormdata( {...formData, location : e.target.value} )} value={location}
             />
 
-    <TextField
+   
+    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fr">
+      <DatePicker 
+      id="outlined-required"
+      label="Date de la course"
+      value={date} // Important: Use the formData.date value here to show the selected date
+      onChange={handleDateChange} 
+      
+      />
+    </LocalizationProvider>
+      
+    {/* <DateField
               required
               id="outlined-required"
-              label="date"
+              label="Date de la course"
               defaultValue=""
               onChange={(e) => setFormdata( {...formData, date : e.target.value} )} value={date}
-            />
+            /> */}
 
     <TextField
               required
