@@ -82,8 +82,8 @@ function Home() {
     <>
  
     <div>
-      <DateTest></DateTest>
-      <EventAdd></EventAdd>
+   
+      
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
           <Transition.Child
@@ -247,7 +247,13 @@ function Home() {
           {/* Your content */}
           
           {/* <UserListing></UserListing> */}
-          {activeTab === 'user' && <UserListing />}
+          {activeTab === 'user' && (
+            <div>
+              <EventAdd /> 
+              <br/><br/><br/>
+              <UserListing />
+            </div>
+          )}
           {activeTab === 'event' && <EventListing />}
           {activeTab === 'team' && <EventListing />}
           {activeTab === 'order' && <EventListing />}
