@@ -25,17 +25,17 @@ function EventAdd() {
     active: true,
     max_capacity:'',
     description:'',
-    banner_img:'',
+    banner_img:'https://www.frappadingue.net/wp-content/uploads/2016/03/course-a-obstacles-frappadingue-07-1024x683.jpg',
     price:'',
     year:'',
-    thumb_image:''
+    thumb_image:'https://www.frappadingue.net/wp-content/uploads/2016/03/course-a-obstacles-frappadingue-07-1024x683.jpg'
   });
 
 
 
 
   const { name, location, date, zip_code, start_hour, active, max_capacity, description, banner_img, price, year, thumb_image } = formData;
-  const isFormValid = name && location && date && zip_code && start_hour && active && max_capacity && description && banner_img && price && year && thumb_image;
+  const isFormValid = name && location && date && zip_code && start_hour && active && max_capacity && description && price && year ;
 
 
  
@@ -64,7 +64,7 @@ function EventAdd() {
       <div className="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3 ">
         
 
-            <form className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+            <form className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-3">
               <div className="px-4 py-6 sm:p-8">
                 <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   

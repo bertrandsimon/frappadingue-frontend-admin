@@ -2,6 +2,8 @@ import styles from '../../styles/EventListing.module.css';
 
 import { useState, useEffect } from 'react';
 
+import { Dialog, DialogContent } from '@mui/material';
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -15,7 +17,21 @@ import Button from '@mui/material/Button';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ModeIcon from '@mui/icons-material/Mode';
 
+import EventAdd from './EventAdd';
+
 function EventListing() {
+
+const [open, setOpen] = useState(false);
+
+const handleClose = () => {
+  setOpen(false);
+};
+
+const handleOpenAddEventModal = (id) => {
+ 
+    setOpen(true);
+
+}
 
 const [eventsData, setEventsData] = useState([]);
 
@@ -50,7 +66,10 @@ const handleDelete = (id) => {
   return (
     <div className={styles.container}>
       <h1>Listing courses</h1>
-    
+
+      <Button variant="contained" onClick={() => handleOpenAddEventModal()}>AJOUTER UNE COURSE</Button>
+
+
       <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
       
@@ -93,6 +112,17 @@ const handleDelete = (id) => {
         </TableBody>
       </Table>
     </TableContainer>
+
+    <Dialog open={open} onClose={handleClose} maxWidth="xl">
+      
+      <DialogContent>
+
+        <EventAdd></EventAdd>
+
+      </DialogContent>
+
+    </Dialog>
+
     </div>
   );
 

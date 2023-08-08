@@ -10,7 +10,7 @@ function DashboardPage() {
   <div>
     
     <MainLayout componentToDisplayInRightPanel={componentToDisplayInRightPanel}/>
-    <h1>DASHBOARD PAGE</h1>
+    
   </div>
 
   );
