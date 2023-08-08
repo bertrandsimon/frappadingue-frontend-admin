@@ -41,7 +41,7 @@ function EventAdd() {
  
 
   const handleSubmit = () => {
-    fetch('http://localhost:3000/events/', {
+    fetch('https://frappadingue-backend.vercel.app/events/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, location, date, zip_code, start_hour, active, max_capacity, description, banner_img, price, year, thumb_image }),
@@ -274,8 +274,8 @@ function EventAdd() {
               <div className="flex items-center justify-center gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
               
               <Button variant="contained" href="#contained-buttons" onClick={ () => handleSubmit() } disabled={!isFormValid}>
-      CREER COURSE
-    </Button>
+                CREER COURSE
+              </Button>
               </div>
             </form>
           </div>

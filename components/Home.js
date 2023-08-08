@@ -12,9 +12,8 @@ import {
 } from '@heroicons/react/24/outline'
 
 
-
+import FileUploadDummy from './utilities/FileUploadDummy';
 import EventAdd from './event/EventAdd';
-import DateTest from './event/DateTest';
 import EventListing from './event/EventListing';
 import UserListing from './user/UserListing';
 
@@ -249,6 +248,8 @@ function Home() {
           {/* <UserListing></UserListing> */}
           {activeTab === 'user' && (
             <div>
+              <FileUploadDummy></FileUploadDummy>
+              <br/><br/><br/>
               <EventAdd /> 
               <br/><br/><br/>
               <UserListing />

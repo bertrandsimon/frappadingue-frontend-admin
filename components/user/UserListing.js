@@ -43,7 +43,7 @@ const columns = [
 
 
 useEffect(() => {
-  fetch('http://localhost:3000/users/allUsers')
+  fetch('https://frappadingue-backend.vercel.app/users/allUsers')
     .then(response => response.json())
     .then(data => {
       // Map the data to rename _id to id for DataGrid
@@ -60,7 +60,7 @@ useEffect(() => {
 }, [usersData]);
 
 const handlePreview = (id) => {
-  fetch(`http://localhost:3000/users/id/${id}`)
+  fetch(`https://frappadingue-backend.vercel.app/users/id/${id}`)
     .then(response => response.json())
     .then( data => setSingleUserData(data.user))
     setOpen(true);
@@ -73,7 +73,7 @@ useEffect(() => {
 
 const handleDelete = (id) => {
   console.log(id)
-  fetch(`http://localhost:3000/events/delete/${id}`, {
+  fetch(`https://frappadingue-backend.vercel.app/events/delete/${id}`, {
     method: 'DELETE',
   })
     .then(response => response.json())

@@ -20,7 +20,7 @@ function EventListing() {
 const [eventsData, setEventsData] = useState([]);
 
 useEffect(() => {
-  fetch('http://localhost:3000/events/allEvents')
+  fetch('https://frappadingue-backend.vercel.app/events/allEvents')
   .then(response => response.json())
   .then(data => {
     setEventsData(data.all)
@@ -34,7 +34,7 @@ useEffect(() => {
 
 const handleDelete = (id) => {
   console.log(id)
-  fetch(`http://localhost:3000/events/delete/${id}`, {
+  fetch(`https://frappadingue-backend.vercel.app/events/delete/${id}`, {
     method: 'DELETE',
   })
     .then(response => response.json())

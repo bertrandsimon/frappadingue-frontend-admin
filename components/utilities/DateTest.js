@@ -4,7 +4,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import 'dayjs/locale/fr';
 
 
-function DateTest() {
+function DatePickerDummy() {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fr">
@@ -16,4 +16,4 @@ function DateTest() {
   );
 }
 
-export default DateTest;
+export default DatePickerDummy;
