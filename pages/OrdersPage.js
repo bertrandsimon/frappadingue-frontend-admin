@@ -1,13 +1,14 @@
 import MainLayout from "../components/MainLayout";
+
 import UserListing from "../components/user/UserListing";
 
-function UsersPage() {
+function OrdersPage() {
 
   const componentToDisplayInRightPanel = <UserListing />
   
   return (
   <div>
-    <h1>USERS PAGE</h1>
+    <h1>ORDERS PAGE</h1>
     <MainLayout componentToDisplayInRightPanel={componentToDisplayInRightPanel}/>
   </div>
 
@@ -15,4 +16,4 @@ function UsersPage() {
 
 }
 
-export default UsersPage;
+export default OrdersPage;

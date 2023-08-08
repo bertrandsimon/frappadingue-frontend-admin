@@ -1,13 +1,15 @@
 import MainLayout from "../components/MainLayout";
+
 import UserListing from "../components/user/UserListing";
+import EventListing from "../components/event/EventListing";
 
-function UsersPage() {
+function EventsPage() {
 
-  const componentToDisplayInRightPanel = <UserListing />
+  const componentToDisplayInRightPanel = <EventListing />
   
   return (
   <div>
-    <h1>USERS PAGE</h1>
+    <h1>EVENTS PAGE</h1>
     <MainLayout componentToDisplayInRightPanel={componentToDisplayInRightPanel}/>
   </div>
 
@@ -15,4 +17,4 @@ function UsersPage() {
 
 }
 
-export default UsersPage;
+export default EventsPage;

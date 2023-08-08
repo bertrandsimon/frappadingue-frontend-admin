@@ -1,18 +1,20 @@
 import MainLayout from "../components/MainLayout";
+
 import UserListing from "../components/user/UserListing";
 
-function UsersPage() {
+function DashboardPage() {
 
   const componentToDisplayInRightPanel = <UserListing />
   
   return (
   <div>
-    <h1>USERS PAGE</h1>
+    
     <MainLayout componentToDisplayInRightPanel={componentToDisplayInRightPanel}/>
+    <h1>DASHBOARD PAGE</h1>
   </div>
 
   );
 
 }
 
-export default UsersPage;
+export default DashboardPage;
