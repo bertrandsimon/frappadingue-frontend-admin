@@ -9,7 +9,7 @@ function TeamsPage() {
   return (
   <div>
     <h1>TEAMS PAGE</h1>
-    <MainLayout componentToDisplayInRightPanel={componentToDisplayInRightPanel}/>
+    <MainLayout componentToDisplayInRightPanel={componentToDisplayInRightPanel} itemSelected="Equipes"/>
   </div>
 
   );

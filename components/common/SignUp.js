@@ -16,7 +16,7 @@ function SignUp() {
   const isFormValid = name && surname && email && password;
 
   const handleSubmit = () => {
-    fetch('https://frappadingue-backend.vercel.app/users/signup', {
+    fetch('https://frappadingue-backend.vercel.app/admin/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, surname, email, password }),

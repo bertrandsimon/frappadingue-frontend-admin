@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Dialog, Transition } from '@headlessui/react'
 import {
@@ -24,15 +24,30 @@ function classNames(...classes) {
 function MainLayout(props) {
 
   const componentToDisplay = props.componentToDisplayInRightPanel
+  const itemSelected = props.itemSelected
 
   const navigation = [
-    { name: 'Dashboard', icon: HomeIcon, current: true },
+    { name: 'Dashboard', icon: HomeIcon, current: false },
     { name: 'Courses', icon: CalendarIcon, current: false },
     { name: 'Clients', icon: UsersIcon, current: false },
     { name: 'Equipes', icon: BoltIcon, current: false },
     { name: 'Commandes', icon: DocumentDuplicateIcon, current: false },
   ]
   
+  const [navigationWithCurrentItem, setNavigationWithCurrentItem] = useState(navigation)
+
+  useEffect(() => {
+    const navigationUpdated = navigation.map((item) => ({
+      ...item,
+      current: item.name === itemSelected, 
+    }));
+    setNavigationWithCurrentItem(navigationUpdated);
+  }, []);
+
+  useEffect(() => {
+    console.log('Navigation after re-render:', navigation);
+  }, [navigationWithCurrentItem]); // Add navigationWithCurrentItem as a dependency to the effect
+
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
@@ -126,7 +141,7 @@ function MainLayout(props) {
                      
 
                         <ul role="list" className="-mx-2 space-y-1">
-                          {navigation.map((item) => (
+                          {navigationWithCurrentItem.map((item) => (
                             <li key={item.name} onClick={() => handleNavigationClick(item.name)}>
                               <a
                                 
@@ -171,7 +186,7 @@ function MainLayout(props) {
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>
                 <ul role="list" className="-mx-2 space-y-1">
-                  {navigation.map((item) => (
+                  {navigationWithCurrentItem.map((item) => (
                     <li key={item.name} onClick={() => handleNavigationClick(item.name)}>
                       <a
                         

@@ -10,7 +10,7 @@ function EventsPage() {
   return (
   <div>
     <h1>EVENTS PAGE</h1>
-    <MainLayout componentToDisplayInRightPanel={componentToDisplayInRightPanel}/>
+    <MainLayout componentToDisplayInRightPanel={componentToDisplayInRightPanel} itemSelected="Courses"/>
   </div>
 
   );

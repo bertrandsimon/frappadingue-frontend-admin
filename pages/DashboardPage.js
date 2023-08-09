@@ -9,7 +9,7 @@ function DashboardPage() {
   return (
   <div>
     
-    <MainLayout componentToDisplayInRightPanel={componentToDisplayInRightPanel}/>
+    <MainLayout componentToDisplayInRightPanel={componentToDisplayInRightPanel} itemSelected="Dashboard"/>
     
   </div>
 
