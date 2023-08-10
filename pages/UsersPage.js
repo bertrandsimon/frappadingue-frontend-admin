@@ -7,7 +7,7 @@ function UsersPage() {
   
   return (
   <div>
-    <h1>USERS PAGE</h1>
+  
     <MainLayout componentToDisplayInRightPanel={componentToDisplayInRightPanel} itemSelected="Clients"/>
   </div>
 

@@ -1,5 +1,7 @@
 import { Fragment, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+// REDUCERS
+import { loggedName, loggedToken, loggedStatus } from '../reducers/user';
 
 import { useRouter } from 'next/router';
 import { Dialog, Transition } from '@headlessui/react'
@@ -25,11 +27,19 @@ function classNames(...classes) {
 }
 
 function MainLayout(props) {
+
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    console.log('clicked')
+    dispatch( loggedStatus ())
+  }
+
   const user = useSelector((state) => state.user);
+
   const componentToDisplay = props.componentToDisplayInRightPanel
   const itemSelected = props.itemSelected
-  console.log('user in reducer :', user)
-
+  //console.log('user in reducer :', user)
+  //console.log('user.userConnected in reducer :', user.userConnected)
   const navigation = [
     { name: 'Dashboard', icon: HomeIcon, current: false },
     { name: 'Courses', icon: CalendarIcon, current: false },
@@ -211,7 +221,7 @@ function MainLayout(props) {
               <li>
             
               </li>
-              <li className="-mx-6 mt-auto">
+              <li className="-mx-6 mt-auto" onClick={handleLogout}>
                 <a
                   href="#"
                   className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800"
@@ -221,7 +231,7 @@ function MainLayout(props) {
                     src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80"
                     alt=""
                   />
-                  <span className="sr-only">Your profile</span>
+                 
                   <span aria-hidden="true">Perrine Frappadingue</span>
                 </a>
               </li>
@@ -236,21 +246,21 @@ function MainLayout(props) {
           <Bars3Icon className="h-6 w-6" aria-hidden="true" />
         </button>
         <div className="flex-1 text-sm font-semibold leading-6 text-white">Dashboard</div>
-        <a href="#">
+        <div onClick={handleLogout} className='cursor-pointer'>
           
           <img
             className="h-8 w-8 rounded-full bg-gray-800"
             src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80"
             alt=""
           />
-        </a>
+        </div>
       </div>
 
       <main className="py-10 lg:pl-72">
         <div className="px-4 sm:px-6 lg:px-8">
-              <SignIn></SignIn>             
-              {componentToDisplay}
-          
+              {/* <SignIn></SignIn>              */}
+              {/* {componentToDisplay} */}
+              { user.userConnected ? componentToDisplay : <SignIn></SignIn> }
           </div>
       </main>
     </div>
