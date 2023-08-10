@@ -1,4 +1,6 @@
 import { Fragment, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { useRouter } from 'next/router';
 import { Dialog, Transition } from '@headlessui/react'
 import {
@@ -11,6 +13,7 @@ import {
   BoltIcon,
 } from '@heroicons/react/24/outline'
 
+import SignIn from './common/SignIn';
 import EventAdd from './event/EventAdd';
 import EventListing from './event/EventListing';
 import UserListing from './user/UserListing';
@@ -22,9 +25,10 @@ function classNames(...classes) {
 }
 
 function MainLayout(props) {
-
+  const user = useSelector((state) => state.user);
   const componentToDisplay = props.componentToDisplayInRightPanel
   const itemSelected = props.itemSelected
+  console.log('user in reducer :', user)
 
   const navigation = [
     { name: 'Dashboard', icon: HomeIcon, current: false },
@@ -44,9 +48,9 @@ function MainLayout(props) {
     setNavigationWithCurrentItem(navigationUpdated);
   }, []);
 
-  useEffect(() => {
-    console.log('Navigation after re-render:', navigation);
-  }, [navigationWithCurrentItem]); // Add navigationWithCurrentItem as a dependency to the effect
+  // useEffect(() => {
+  //   console.log('Navigation after re-render:', navigation);
+  // }, [navigationWithCurrentItem]); // Add navigationWithCurrentItem as a dependency to the effect
 
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -244,7 +248,7 @@ function MainLayout(props) {
 
       <main className="py-10 lg:pl-72">
         <div className="px-4 sm:px-6 lg:px-8">
-
+              <SignIn></SignIn>             
               {componentToDisplay}
           
           </div>

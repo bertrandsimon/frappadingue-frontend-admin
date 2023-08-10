@@ -2,19 +2,25 @@ import styles from '../../styles/SignIn.module.css';
 
 import { useState } from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
+// REDUCERS
+import { loggedName, loggedToken, loggedStatus } from '../../reducers/user';
+
+
+
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 
 function SignIn() {
-
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
 
   const isFormValid = email && password;
 
   const handleSubmit = () => {
-    fetch('https://frappadingue-backend.vercel.app/signin', {
+    fetch('http://localhost:3000/admins/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
@@ -22,7 +28,7 @@ function SignIn() {
       .then(data => {
         console.log(data)
         console.log('connecté OK')
-      //dispatch( loggedStatus ()) 
+      dispatch( loggedStatus ()) 
       //dispatch( loggedName (data.name))
       //dispatch( loggedSurname (data.surname))
       //dispatch( loggedToken (data.token)) ;
