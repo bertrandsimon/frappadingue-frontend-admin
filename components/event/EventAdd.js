@@ -32,26 +32,31 @@ function EventAdd( props ) {
     //banner_img:'https://www.frappadingue.net/wp-content/uploads/2016/03/course-a-obstacles-frappadingue-07-1024x683.jpg',
     price:'',
     year:'',
-    thumb_image:'/images/event1.png'
+    thumb_image:'/images/event1.png',
+    format_s_price: '',
+    format_l_price: '',
+    format_s_stripe_paylink: '',
+    format_l_stripe_paylink: '',
   });
 
 
 
 
-  const { name, location, date, zip_code, start_hour, active, max_capacity, description, price, year, thumb_image } = formData;
+  const { name, location, date, zip_code, start_hour, active, max_capacity, description, price, year, thumb_image, format_s_price, format_l_price, format_s_stripe_paylink, format_l_stripe_paylink} = formData;
   const isFormValid = name && location && date && zip_code && start_hour && active && max_capacity && description && price && year ;
 
 
  
 
   const handleSubmit = () => {
-    fetch('https://frappadingue-backend.vercel.app/events/', {
+    fetch('http://localhost:3000/events/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, location, date, zip_code, start_hour, active, max_capacity, description, price, year, thumb_image }),
+      body: JSON.stringify({ name, location, date, zip_code, start_hour, active, max_capacity, description, price, year, thumb_image, format_s_price, format_l_price, format_s_stripe_paylink,format_l_stripe_paylink }),
     }).then(response => response.json())
       .then(data => {
         // Redirect to /EventsPage and force re-render
+        console.log('formData', formData)
         props.onAddEventSuccess()
       });
   
@@ -231,6 +236,43 @@ function EventAdd( props ) {
                     </div>
                   </div>
                   {/* #ROW 4 */}
+
+                  {/* ROW 5 */}
+                  <div className="sm:col-span-3">
+                 
+                    <div className="mt-2">
+                      <TextField
+                        required
+                        id="outlined-required"
+                        label="Prix format S"
+                        defaultValue=""
+                        type="number"
+                        onChange={(e) => setFormdata( {...formData, format_s_price : e.target.value} )} value={format_s_price}
+                        fullWidth
+                        size="small"
+                        InputLabelProps={{ style: { fontSize: '14px' } }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-3">
+              
+                    <div className="mt-2">
+                      <TextField
+                        required
+                        id="outlined-required"
+                        label="Prix format L"
+                        defaultValue=""
+                        type="number"
+                        onChange={(e) => setFormdata( {...formData, format_l_price : e.target.value} )} value={format_l_price}
+                        fullWidth
+                        size="small"
+                        InputLabelProps={{ style: { fontSize: '14px' } }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* #ROW 5 */}
 
                   {/* COVER PHOTO */}
                   {/* <div className="col-span-full">
