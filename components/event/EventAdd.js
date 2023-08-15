@@ -20,6 +20,7 @@ function EventAdd( props ) {
   const router = useRouter(); 
 
   const todayDate = new Date();
+
   const [formData, setFormdata] = useState({
     name:'',
     location:'',
@@ -41,9 +42,8 @@ function EventAdd( props ) {
 
 
 
-
-  const { name, location, date, zip_code, start_hour, active, max_capacity, description, price, year, thumb_image, format_s_price, format_l_price, format_s_stripe_paylink, format_l_stripe_paylink} = formData;
-  const isFormValid = name && location && date && zip_code && start_hour && active && max_capacity && description && price && year ;
+  const { name, location, date, zip_code, start_hour, active, max_capacity, description, year, thumb_image, format_s_price, format_l_price, format_s_stripe_paylink, format_l_stripe_paylink} = formData;
+  const isFormValid = name && location && date && zip_code && start_hour && active && max_capacity && description && year && format_s_price && format_l_price && format_s_stripe_paylink && format_l_stripe_paylink;
 
 
  
@@ -52,11 +52,11 @@ function EventAdd( props ) {
     fetch('http://localhost:3000/events/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, location, date, zip_code, start_hour, active, max_capacity, description, price, year, thumb_image, format_s_price, format_l_price, format_s_stripe_paylink,format_l_stripe_paylink }),
+      body: JSON.stringify({ name, location, date, zip_code, start_hour, active, max_capacity, description, year, thumb_image, format_s_price, format_l_price, format_s_stripe_paylink,format_l_stripe_paylink }),
     }).then(response => response.json())
       .then(data => {
         // Redirect to /EventsPage and force re-render
-        console.log('formData', formData)
+        
         props.onAddEventSuccess()
       });
   
@@ -222,17 +222,7 @@ function EventAdd( props ) {
                   <div className="sm:col-span-3">
               
                     <div className="mt-2">
-                      <TextField
-                        required
-                        id="outlined-required"
-                        label="Prix"
-                        defaultValue=""
-                        type="number"
-                        onChange={(e) => setFormdata( {...formData, price : e.target.value} )} value={price}
-                        fullWidth
-                        size="small"
-                        InputLabelProps={{ style: { fontSize: '14px' } }}
-                      />
+                      
                     </div>
                   </div>
                   {/* #ROW 4 */}
@@ -274,48 +264,44 @@ function EventAdd( props ) {
 
                   {/* #ROW 5 */}
 
-                  {/* COVER PHOTO */}
-                  {/* <div className="col-span-full">
-                    <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
-                      Photo bannière
-                    </label>
-                    <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                      <div className="text-center">
-                        <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
-                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                          <label
-                            htmlFor="file-upload"
-                            className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                          >
-                            <span>Choisir un fichier</span>
-                            <input id="file-upload" name="file-upload" type="file" className="sr-only" />
-                          </label>
-                          <p className="pl-1">ou drag and drop</p>
-                        </div>
-                        <p className="text-xs leading-5 text-gray-600">Format .JPG</p>
-                      </div>
-                    </div>
-                  </div> */}
-                  {/* #COVER PHOTO */}
-                  
-                  {/* THUMBNAIL */}
-                  {/* <div className="col-span-full">
-                    <label htmlFor="photo" className="block text-sm font-medium leading-6 text-gray-900">
-                      Photo vinette (largeur : 270px / hauteur : 356px, format : .jpg)
-                    </label>
-                    <div className="mt-2 flex items-center gap-x-3">
-                      <UserCircleIcon className="h-12 w-12 text-gray-300" aria-hidden="true" />
-                      <button
-                        type="button"
-                        className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                      >
-                        Change
-                      </button>
-                    </div>
-                  </div> */}
-                  {/* #THUMBNAIL */}
+                  {/* ROW 6 */}
 
-              
+                  <div className="sm:col-span-3">
+                 
+                 <div className="mt-2">
+                   <TextField
+                     required
+                     id="outlined-required"
+                     label="Lien paiement stripe format S"
+                     defaultValue=""
+                     onChange={(e) => setFormdata( {...formData, format_s_stripe_paylink : e.target.value} )} value={format_s_stripe_paylink}
+                     fullWidth
+                     size="small"
+                     InputLabelProps={{ style: { fontSize: '14px' } }}
+                   />
+                 </div>
+               </div>
+
+               <div className="sm:col-span-3">
+           
+                 <div className="mt-2">
+                   <TextField
+                     required
+                     id="outlined-required"
+                     label="Lien paiement stripe format L"
+                     defaultValue=""
+                     onChange={(e) => setFormdata( {...formData, format_l_stripe_paylink : e.target.value} )} value={format_l_stripe_paylink}
+                     fullWidth
+                     size="small"
+                     InputLabelProps={{ style: { fontSize: '14px' } }}
+                   />
+                 </div>
+               </div>
+
+
+                  {/* #ROW 6 */}
+
+
                 </div>
               </div>
               <div className="flex items-center justify-center gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
