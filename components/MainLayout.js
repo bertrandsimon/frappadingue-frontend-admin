@@ -30,7 +30,7 @@ function MainLayout(props) {
 
   const dispatch = useDispatch();
   const handleLogout = () => {
-    console.log('clicked')
+    
     dispatch( loggedStatus ())
   }
 
@@ -221,20 +221,29 @@ function MainLayout(props) {
               <li>
             
               </li>
-              <li className="-mx-6 mt-auto" onClick={handleLogout}>
-                <a
-                  href="#"
-                  className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800"
-                >
-                  <img
-                    className="h-8 w-8 rounded-full bg-gray-800"
-                    src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80"
-                    alt=""
-                  />
-                 
-                  <span aria-hidden="true">Perrine Frappadingue</span>
-                </a>
-              </li>
+
+              { user.userConnected && 
+              
+                  <li className="-mx-6 mt-auto" onClick={handleLogout}>
+                      <a
+                        href="#"
+                        className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800"
+                      >
+                        <img
+                          className="h-8 w-8 rounded-full bg-gray-800"
+                          src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80"
+                          alt=""
+                        />
+                      
+                        <span aria-hidden="true">Perrine Frappadingue</span>
+                      </a>
+                  </li>
+              
+              }
+
+             
+
+
             </ul>
           </nav>
         </div>
