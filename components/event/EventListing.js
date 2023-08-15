@@ -35,9 +35,24 @@ function EventListing() {
 
 const [open, setOpen] = useState(false);
 
+const [openConfirmDelete, setopenConfirmDelete] = useState(false);
+const [idToDelete, setIdToDelete] = useState(null);
+
+const handleOpenDeleteConfirm = (boolean, id) => {
+ 
+  setopenConfirmDelete(boolean);
+  setIdToDelete(id);
+}
+
+
 const handleClose = () => {
   setOpen(false);
 };
+
+const handleCloseDeleteModal = () => {
+  setopenConfirmDelete(false);
+};
+
 
 const handleOpenAddEventModal = (id) => {
  
@@ -61,15 +76,15 @@ useEffect(() => {
 
 
 const handleDelete = (id) => {
-  console.log(id)
+  
   fetch(`https://frappadingue-backend.vercel.app/events/delete/${id}`, {
     method: 'DELETE',
   })
     .then(response => response.json())
     .then(data => {
-      // Assuming the API returns the updated events list after deletion
-      console.log('DELETED')
+      
       setEventsData(prevEvents => prevEvents.filter(event => event._id !== id));
+      setopenConfirmDelete(false);
     })
     .catch(error => {
       console.error('Error deleting event:', error);
@@ -114,7 +129,7 @@ const handleDelete = (id) => {
                 </IconButton>
               </TableCell>
               <TableCell align="center"> 
-                <IconButton style={{ color: 'red' }} aria-label="Supprimer" onClick ={ () => handleDelete(event._id) }>
+                <IconButton style={{ color: 'red' }} aria-label="Supprimer" onClick ={ () => handleOpenDeleteConfirm(true, event._id) }>
                   <DeleteForeverIcon/>
                 </IconButton>
                 </TableCell>
@@ -124,13 +139,25 @@ const handleDelete = (id) => {
         </TableBody>
       </Table>
     </TableContainer>
-
+    
+    {/* Modal new event */}
     <Dialog open={open} onClose={handleClose} maxWidth="xl">
       
       <DialogContent>
 
         <EventAdd onAddEventSuccess={handleAddEventSuccess}></EventAdd>
 
+      </DialogContent>
+
+    </Dialog>
+
+    {/* modal confirm delete */}
+    <Dialog open={openConfirmDelete} onClose={handleClose} maxWidth="xl">
+      
+      <DialogContent className='flex items-center justify-center'>
+        <div className='p-4'><Button onClick ={ () => handleDelete(idToDelete)} variant="outlined" color="error" size="small" > Surpprimer la course ? </Button></div>
+        <div className='p-4'><Button onClick={ ()=> handleCloseDeleteModal()} variant="outlined" size="small" > Annuler </Button> </div>
+      
       </DialogContent>
 
     </Dialog>
