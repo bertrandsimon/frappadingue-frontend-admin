@@ -1,5 +1,6 @@
 import styles from '../../styles/EventAdd.module.css';
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import { useRouter } from 'next/router';
 
 import { useState } from 'react';
 
@@ -14,7 +15,10 @@ import 'dayjs/locale/fr';
 
 
 
-function EventAdd() {
+function EventAdd( props ) {
+
+  const router = useRouter(); 
+
   const todayDate = new Date();
   const [formData, setFormdata] = useState({
     name:'',
@@ -25,16 +29,16 @@ function EventAdd() {
     active: true,
     max_capacity:'',
     description:'',
-    banner_img:'https://www.frappadingue.net/wp-content/uploads/2016/03/course-a-obstacles-frappadingue-07-1024x683.jpg',
+    //banner_img:'https://www.frappadingue.net/wp-content/uploads/2016/03/course-a-obstacles-frappadingue-07-1024x683.jpg',
     price:'',
     year:'',
-    thumb_image:'https://www.frappadingue.net/wp-content/uploads/2016/03/course-a-obstacles-frappadingue-07-1024x683.jpg'
+    thumb_image:'/images/event1.png'
   });
 
 
 
 
-  const { name, location, date, zip_code, start_hour, active, max_capacity, description, banner_img, price, year, thumb_image } = formData;
+  const { name, location, date, zip_code, start_hour, active, max_capacity, description, price, year, thumb_image } = formData;
   const isFormValid = name && location && date && zip_code && start_hour && active && max_capacity && description && price && year ;
 
 
@@ -44,10 +48,11 @@ function EventAdd() {
     fetch('https://frappadingue-backend.vercel.app/events/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, location, date, zip_code, start_hour, active, max_capacity, description, banner_img, price, year, thumb_image }),
+      body: JSON.stringify({ name, location, date, zip_code, start_hour, active, max_capacity, description, price, year, thumb_image }),
     }).then(response => response.json())
       .then(data => {
-      
+        // Redirect to /EventsPage and force re-render
+        props.onAddEventSuccess()
       });
   
   };
@@ -130,7 +135,7 @@ function EventAdd() {
                           label="Date de la course"
                           value={date} // Important: Use the formData.date value here to show the selected date
                           onChange={handleDateChange} 
-                          size="small"
+                     
                         />
                      </LocalizationProvider>
                     </div>
@@ -228,7 +233,7 @@ function EventAdd() {
                   {/* #ROW 4 */}
 
                   {/* COVER PHOTO */}
-                  <div className="col-span-full">
+                  {/* <div className="col-span-full">
                     <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
                       Photo bannière
                     </label>
@@ -248,11 +253,11 @@ function EventAdd() {
                         <p className="text-xs leading-5 text-gray-600">Format .JPG</p>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   {/* #COVER PHOTO */}
                   
                   {/* THUMBNAIL */}
-                  <div className="col-span-full">
+                  {/* <div className="col-span-full">
                     <label htmlFor="photo" className="block text-sm font-medium leading-6 text-gray-900">
                       Photo vinette (largeur : 270px / hauteur : 356px, format : .jpg)
                     </label>
@@ -265,7 +270,7 @@ function EventAdd() {
                         Change
                       </button>
                     </div>
-                  </div>
+                  </div> */}
                   {/* #THUMBNAIL */}
 
               

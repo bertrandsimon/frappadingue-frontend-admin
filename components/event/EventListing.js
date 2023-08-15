@@ -21,6 +21,18 @@ import EventAdd from './EventAdd';
 
 function EventListing() {
 
+  const handleAddEventSuccess = () => {
+    // Close the modal after successful event creation
+    setOpen(false);
+
+    // Refresh eventsData by fetching updated data
+    fetch('https://frappadingue-backend.vercel.app/events/allEvents')
+      .then(response => response.json())
+      .then(data => {
+        setEventsData(data.all);
+      });
+  };
+
 const [open, setOpen] = useState(false);
 
 const handleClose = () => {
@@ -117,7 +129,7 @@ const handleDelete = (id) => {
       
       <DialogContent>
 
-        <EventAdd></EventAdd>
+        <EventAdd onAddEventSuccess={handleAddEventSuccess}></EventAdd>
 
       </DialogContent>
 

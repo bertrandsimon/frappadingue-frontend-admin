@@ -12,7 +12,6 @@ import { persistStore, persistReducer } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import storage from 'redux-persist/lib/storage';
 
-import hiddenArticles from '../reducers/hiddenArticles';
 import user from '../reducers/user';
 
 const reducers = combineReducers({ user });

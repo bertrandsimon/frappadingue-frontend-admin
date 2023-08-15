@@ -8,7 +8,7 @@ function OrdersPage() {
   
   return (
   <div>
-    <h1>ORDERS PAGE</h1>
+   
     <MainLayout componentToDisplayInRightPanel={componentToDisplayInRightPanel} itemSelected="Commandes"/>
   </div>
 
